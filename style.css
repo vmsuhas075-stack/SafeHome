@@ -1,1 +1,99 @@
-body{font-family:Arial;padding:20px}.card,.calculator{padding:15px;border:1px solid #ccc;margin:10px;border-radius:8px}.buttons button{margin:2px}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:20px;
+}
+
+.dashboard{
+    max-width:600px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    font-size:38px;
+    margin-bottom:20px;
+    color:#222;
+}
+
+.card{
+    background:white;
+    margin:15px 0;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+button{
+    width:100%;
+    padding:18px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+a{
+    text-decoration:none;
+    font-size:22px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:15px;
+    font-size:18px;
+    margin-top:10px;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+
+textarea{
+    min-height:150px;
+}
+
+ul{
+    padding-left:20px;
+}
+
+li{
+    font-size:18px;
+    margin:10px 0;
+}
+
+#sosBtn{
+    background:#dc2626;
+    font-size:24px;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+
+h1{
+    font-size:32px;
+}
+
+button{
+    font-size:20px;
+}
+
+a{
+    font-size:20px;
+}
+
+}
