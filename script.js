@@ -50,3 +50,6 @@ function changeLanguage(){let l=document.getElementById('language').value;let t=
 if(l==='kn'){t.innerHTML='ಸೇಫ್ ಹೋಮ್+';s.innerHTML='ತುರ್ತು ಸಹಾಯ';}
 else if(l==='hi'){t.innerHTML='सेफ होम+';s.innerHTML='आपातकालीन सहायता';}
 else{t.innerHTML='SafeHome+';s.innerHTML='SOS ALERT';}}
+function fakeExit(){
+    window.location.href="https://www.google.com";
+}
