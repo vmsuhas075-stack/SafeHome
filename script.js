@@ -8,37 +8,37 @@ navigator.geolocation.getCurrentPosition(
 
 function(position){
 
-let lat = position.coords.latitude;
-let lon = position.coords.longitude;
+let popup = document.createElement("div");
 
-document.body.innerHTML += `
-
-<div style="
-position:fixed;
-top:20px;
-left:20px;
-right:20px;
-background:red;
-color:white;
-padding:20px;
-font-size:20px;
-border-radius:15px;
-z-index:9999;
-">
-
-🚨 SOS SENT SUCCESSFULLY<br><br>
-
-📍 Location Shared<br>
-
-Latitude: ${lat}<br>
-Longitude: ${lon}<br><br>
-
-👮 Nearby Police Station Notified
-
-</div>
-
+popup.innerHTML = `
+<h2>🚨 SOS Activated</h2>
+<p>📍 Location Captured Successfully</p>
+<p>👮 Nearby Police Station Notified</p>
 `;
 
+popup.style.position = "fixed";
+popup.style.top = "50%";
+popup.style.left = "50%";
+popup.style.transform = "translate(-50%, -50%)";
+popup.style.background = "white";
+popup.style.color = "black";
+popup.style.padding = "25px";
+popup.style.borderRadius = "20px";
+popup.style.textAlign = "center";
+popup.style.boxShadow = "0 0 20px rgba(0,0,0,0.4)";
+popup.style.zIndex = "9999";
+popup.style.width = "300px";
+
+document.body.appendChild(popup);
+
+setTimeout(() => {
+    popup.remove();
+}, 5000);
+
+},
+
+function(){
+    alert("Location permission denied");
 }
 
 );
