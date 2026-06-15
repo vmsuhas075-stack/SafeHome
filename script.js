@@ -4,61 +4,60 @@ function clearDisplay(){document.getElementById('display').value='';}
 function checkCode(){if(document.getElementById('display').value==='1234')window.location='dashboard.html';}
 function sendSOS() {
 
-    navigator.geolocation.getCurrentPosition(
+    let popup = document.createElement("div");
 
-        function(position) {
+    popup.style.position = "fixed";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
+    popup.style.width = "90%";
+    popup.style.maxWidth = "650px";
+    popup.style.background = "#ffffff";
+    popup.style.border = "5px solid red";
+    popup.style.borderRadius = "20px";
+    popup.style.padding = "35px";
+    popup.style.textAlign = "center";
+    popup.style.boxShadow = "0 0 25px rgba(0,0,0,0.4)";
+    popup.style.zIndex = "9999";
 
-            let popup = document.createElement("div");
+    popup.innerHTML = `
+        <div style="font-size:80px;">🚨</div>
+        <h1 style="color:red;">SOS ACTIVATED</h1>
+        <h2 id="status">📍 Detecting Current Location...</h2>
+        <p style="font-size:20px;">Simulation Mode</p>
+    `;
 
-            popup.innerHTML = `
-                <div style="font-size:80px;">🚨</div>
+    document.body.appendChild(popup);
 
-                <h1 style="color:red;font-size:45px;">
-                    SOS ACTIVATED
-                </h1>
+    setTimeout(() => {
+        document.getElementById("status").innerHTML =
+        "🔍 Finding Nearby Police Station...";
+    }, 2000);
 
-                <p style="font-size:28px;">
-                    📍 Location Captured Successfully
-                </p>
+    setTimeout(() => {
+        document.getElementById("status").innerHTML =
+        "📡 Connecting to Nearby Police Station...";
+    }, 4000);
 
-                <p style="font-size:28px;">
-                    👮 Nearby Police Station Notified
-                </p>
+    setTimeout(() => {
+        document.getElementById("status").innerHTML =
+        "✅ Connected Successfully";
+    }, 6000);
 
-                <p style="font-size:24px;color:green;">
-                    ✅ Emergency Alert Process Started
-                </p>
-            `;
+    setTimeout(() => {
+        document.getElementById("status").innerHTML =
+        "🚓 Emergency Alert Registered";
+    }, 8000);
 
-            popup.style.position = "fixed";
-            popup.style.top = "50%";
-            popup.style.left = "50%";
-            popup.style.transform = "translate(-50%, -50%)";
-            popup.style.width = "90%";
-            popup.style.maxWidth = "650px";
-            popup.style.background = "#ffffff";
-            popup.style.padding = "40px";
-            popup.style.borderRadius = "25px";
-            popup.style.textAlign = "center";
-            popup.style.border = "6px solid red";
-            popup.style.boxShadow = "0 0 30px rgba(0,0,0,0.5)";
-            popup.style.zIndex = "9999";
+    setTimeout(() => {
+        document.getElementById("status").innerHTML =
+        "👮 Police Will Reach You Soon";
+    }, 10000);
 
-            document.body.appendChild(popup);
-
-            // After 5 seconds, return to calculator page
-            setTimeout(function () {
-                window.location.href = "index.html";
-            }, 5000);
-
-        },
-
-        function() {
-            alert("Location permission denied.");
-        }
-
-    );
-
+    setTimeout(() => {
+        popup.remove();
+        window.location.href = "index.html";
+    }, 12000);
 }
 function saveDiary(){localStorage.setItem('incident_'+Date.now(),document.getElementById('note').value);alert('Saved');}
 function addContact(){localStorage.setItem(document.getElementById('name').value,document.getElementById('phone').value);alert('Added');}
