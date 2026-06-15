@@ -13,33 +13,19 @@ function sendSOS() {
             popup.innerHTML = `
                 <div style="font-size:80px;">🚨</div>
 
-                <h1 style="
-                    color:red;
-                    font-size:45px;
-                    margin:15px 0;
-                ">
+                <h1 style="color:red;font-size:45px;">
                     SOS ACTIVATED
                 </h1>
 
-                <p style="
-                    font-size:28px;
-                    margin:10px 0;
-                ">
+                <p style="font-size:28px;">
                     📍 Location Captured Successfully
                 </p>
 
-                <p style="
-                    font-size:28px;
-                    margin:10px 0;
-                ">
+                <p style="font-size:28px;">
                     👮 Nearby Police Station Notified
                 </p>
 
-                <p style="
-                    font-size:24px;
-                    color:green;
-                    margin-top:20px;
-                ">
+                <p style="font-size:24px;color:green;">
                     ✅ Emergency Alert Process Started
                 </p>
             `;
@@ -48,37 +34,27 @@ function sendSOS() {
             popup.style.top = "50%";
             popup.style.left = "50%";
             popup.style.transform = "translate(-50%, -50%)";
-
             popup.style.width = "90%";
             popup.style.maxWidth = "650px";
-
             popup.style.background = "#ffffff";
-            popup.style.color = "#000000";
-
             popup.style.padding = "40px";
             popup.style.borderRadius = "25px";
-
             popup.style.textAlign = "center";
-
-            popup.style.fontFamily = "Arial, sans-serif";
-
-            popup.style.boxShadow = "0 0 30px rgba(0,0,0,0.5)";
             popup.style.border = "6px solid red";
-
+            popup.style.boxShadow = "0 0 30px rgba(0,0,0,0.5)";
             popup.style.zIndex = "9999";
 
             document.body.appendChild(popup);
 
+            // After 5 seconds, return to calculator page
             setTimeout(function () {
-                popup.remove();
+                window.location.href = "index.html";
             }, 5000);
 
         },
 
         function() {
-
             alert("Location permission denied.");
-
         }
 
     );
