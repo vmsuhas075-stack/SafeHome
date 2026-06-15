@@ -2,46 +2,86 @@
 function appendValue(v){document.getElementById('display').value+=v;}
 function clearDisplay(){document.getElementById('display').value='';}
 function checkCode(){if(document.getElementById('display').value==='1234')window.location='dashboard.html';}
-function sendSOS(){
+function sendSOS() {
 
-navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.getCurrentPosition(
 
-function(position){
+        function(position) {
 
-let popup = document.createElement("div");
+            let popup = document.createElement("div");
 
-popup.innerHTML = `
-<h2>🚨 SOS Activated</h2>
-<p>📍 Location Captured Successfully</p>
-<p>👮 Nearby Police Station Notified</p>
-`;
+            popup.innerHTML = `
+                <div style="font-size:80px;">🚨</div>
 
-popup.style.position = "fixed";
-popup.style.top = "50%";
-popup.style.left = "50%";
-popup.style.transform = "translate(-50%, -50%)";
-popup.style.background = "white";
-popup.style.color = "black";
-popup.style.padding = "25px";
-popup.style.borderRadius = "20px";
-popup.style.textAlign = "center";
-popup.style.boxShadow = "0 0 20px rgba(0,0,0,0.4)";
-popup.style.zIndex = "9999";
-popup.style.width = "300px";
+                <h1 style="
+                    color:red;
+                    font-size:45px;
+                    margin:15px 0;
+                ">
+                    SOS ACTIVATED
+                </h1>
 
-document.body.appendChild(popup);
+                <p style="
+                    font-size:28px;
+                    margin:10px 0;
+                ">
+                    📍 Location Captured Successfully
+                </p>
 
-setTimeout(() => {
-    popup.remove();
-}, 5000);
+                <p style="
+                    font-size:28px;
+                    margin:10px 0;
+                ">
+                    👮 Nearby Police Station Notified
+                </p>
 
-},
+                <p style="
+                    font-size:24px;
+                    color:green;
+                    margin-top:20px;
+                ">
+                    ✅ Emergency Alert Process Started
+                </p>
+            `;
 
-function(){
-    alert("Location permission denied");
-}
+            popup.style.position = "fixed";
+            popup.style.top = "50%";
+            popup.style.left = "50%";
+            popup.style.transform = "translate(-50%, -50%)";
 
-);
+            popup.style.width = "90%";
+            popup.style.maxWidth = "650px";
+
+            popup.style.background = "#ffffff";
+            popup.style.color = "#000000";
+
+            popup.style.padding = "40px";
+            popup.style.borderRadius = "25px";
+
+            popup.style.textAlign = "center";
+
+            popup.style.fontFamily = "Arial, sans-serif";
+
+            popup.style.boxShadow = "0 0 30px rgba(0,0,0,0.5)";
+            popup.style.border = "6px solid red";
+
+            popup.style.zIndex = "9999";
+
+            document.body.appendChild(popup);
+
+            setTimeout(function () {
+                popup.remove();
+            }, 5000);
+
+        },
+
+        function() {
+
+            alert("Location permission denied.");
+
+        }
+
+    );
 
 }
 function saveDiary(){localStorage.setItem('incident_'+Date.now(),document.getElementById('note').value);alert('Saved');}
