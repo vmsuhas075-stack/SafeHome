@@ -1,75 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SafeHome+ Login</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <title>SOS Safety App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="login-container">
+<!-- LOGIN -->
+<div id="loginCard" class="card">
+    <h2>Login</h2>
 
-<div class="login-card">
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
 
-<div class="logo">
-🛡️
+    <button onclick="loginUser()">Login</button>
+
+    <p>
+        <span id="showSignup">Create Account</span> |
+        <span id="showReset">Forgot Password</span>
+    </p>
 </div>
 
-<h1>SafeHome+</h1>
+<!-- SIGNUP -->
+<div id="signupCard" class="card" style="display:none;">
+    <h2>Sign Up</h2>
 
-<p>Your Personal Safety Companion</p>
+    <input type="text" id="signupName" placeholder="Name">
+    <input type="email" id="signupEmail" placeholder="Email">
+    <input type="password" id="signupPassword" placeholder="Password">
 
-<input
-type="email"
-id="username"
-class="login-input"
-placeholder="Email">
+    <button onclick="registerUser()">Create Account</button>
 
-<input
-type="password"
-id="password"
-class="login-input"
-placeholder="Password">
+    <p><span id="showLogin">Back to Login</span></p>
+</div>
 
-<button
-class="login-btn"
-onclick="login()">
+<!-- RESET -->
+<div id="resetCard" class="card" style="display:none;">
+    <h2>Reset Password</h2>
 
-Login
+    <input type="email" id="resetEmail" placeholder="Enter Email">
 
-</button>
+    <button onclick="resetPassword()">Send Reset</button>
 
-<br><br>
+    <p><span id="backToLogin">Back to Login</span></p>
+</div>
 
-<button
-class="register-btn"
-onclick="window.location.href='register.html'">
-<p style="margin-top:15px;">
-<a href="forgot.html" style="color:#4fc3ff;text-decoration:none;">
-Forgot Password?
-</a>
-</p>
-Create Account
+<!-- SOS -->
+<div class="sos-container">
 
-</button>
+    <button id="sosBtn" onclick="startSOS()">SOS</button>
 
-<p class="login-footer">
-
-Stay Safe • Stay Connected
-
-</p>
+    <div id="sosTimerContainer" style="display:none;">
+        <div id="sosCircle">
+            <span id="timerText">10</span>
+        </div>
+        <p>Emergency Active...</p>
+    </div>
 
 </div>
 
+<!-- OPTIONAL DIARY -->
+<div class="card">
+    <h3>Incident Diary</h3>
+    <textarea id="note" placeholder="Write incident..."></textarea>
+    <button onclick="saveDiary()">Save</button>
+</div>
+
+<!-- LANGUAGE -->
+<div class="card">
+    <select id="language" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="kn">Kannada</option>
+    </select>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
