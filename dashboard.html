@@ -1,13 +1,89 @@
-<!DOCTYPE html><html><head><title>SafeHome+</title><link rel="stylesheet" href="style.css"></head>
-<body><h1 id="title">SafeHome+</h1>
-<select id="language" onchange="changeLanguage()"><option value="en">English</option><option value="kn">Kannada</option><option value="hi">Hindi</option></select>
-<div class="card"><button class="sos-btn" onclick="sendSOS()">
-    SOS
-</button></div>
-<div class="card"><a href="diary.html">Incident Diary</a></div>
-<div class="card"><a href="contacts.html">Trusted Contacts</a></div>
-<div class="card"><a href="resources.html">Resources</a></div>
-<script src="script.js"></script></body></html>
-<div class="card">
-    <button onclick="fakeExit()">⚡ Quick Exit</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeHome+</title>
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="logo">
+        🛡️ <span>SafeHome+</span>
+    </div>
+
+    <div class="right-icons">
+        <i class="fa-solid fa-bell"></i>
+        <i class="fa-solid fa-user"></i>
+    </div>
+</header>
+
+<div class="welcome-card">
+
+<h2>Hello 👋</h2>
+
+<p>Your safety shield is active</p>
+
+<span class="safe-badge">● SAFE</span>
+
 </div>
+
+<div class="sos-card" onclick="sendSOS()">
+
+<div>
+
+<h2>🚨 SOS EMERGENCY</h2>
+
+<p>Tap to alert emergency contacts</p>
+
+</div>
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</div>
+
+<h3 class="heading">Safety Features</h3>
+
+<div class="grid">
+
+<div class="feature">
+<i class="fa-solid fa-location-dot"></i>
+<h4>Live Location</h4>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-users"></i>
+<h4>Trusted Contacts</h4>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-phone"></i>
+<h4>Helplines</h4>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-book"></i>
+<h4>Incident Diary</h4>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-microphone"></i>
+<h4>Voice Recorder</h4>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-map"></i>
+<h4>Safe Route</h4>
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
