@@ -1,65 +1,27 @@
-// =========================
-// NAVIGATION (LOGIN SYSTEM)
-// =========================
+// ================= NAVIGATION =================
 
-document.getElementById("showSignup")?.addEventListener("click", () => {
+document.getElementById("showSignup").onclick = () => {
     document.getElementById("loginCard").style.display = "none";
     document.getElementById("signupCard").style.display = "block";
-});
+};
 
-document.getElementById("showLogin")?.addEventListener("click", () => {
+document.getElementById("showLogin").onclick = () => {
     document.getElementById("signupCard").style.display = "none";
     document.getElementById("loginCard").style.display = "block";
-});
+};
 
-document.getElementById("showReset")?.addEventListener("click", () => {
+document.getElementById("showReset").onclick = () => {
     document.getElementById("loginCard").style.display = "none";
     document.getElementById("resetCard").style.display = "block";
-});
+};
 
-document.getElementById("backToLogin")?.addEventListener("click", () => {
+document.getElementById("backToLogin").onclick = () => {
     document.getElementById("resetCard").style.display = "none";
     document.getElementById("loginCard").style.display = "block";
-});
+};
 
 
-// =========================
-// AUTH (DUMMY)
-// =========================
-
-function loginUser() {
-
-    let email = document.getElementById("loginEmail").value;
-    let password = document.getElementById("loginPassword").value;
-
-    if (!email || !password) {
-        alert("Please fill all fields");
-        return;
-    }
-
-    let storedUser = localStorage.getItem("user_" + email);
-
-    if (!storedUser) {
-        alert("No account found. Please sign up first.");
-        return;
-    }
-
-    let user = JSON.parse(storedUser);
-
-    if (user.password === password) {
-
-        alert("Login successful ✔ Welcome " + user.name);
-
-        // SAVE SESSION (important fix)
-        localStorage.setItem("loggedInUser", email);
-
-        // OPTIONAL: show SOS page / hide login
-        document.getElementById("loginCard").style.display = "none";
-
-    } else {
-        alert("Wrong password ❌");
-    }
-}
+// ================= AUTH =================
 
 function registerUser() {
 
@@ -68,49 +30,63 @@ function registerUser() {
     let password = document.getElementById("signupPassword").value;
 
     if (!name || !email || !password) {
-        alert("Please fill all fields");
+        alert("Fill all fields");
         return;
     }
 
-    // check if already exists
     if (localStorage.getItem("user_" + email)) {
-        alert("Account already exists!");
+        alert("Account already exists");
         return;
     }
 
-    let user = {
-        name: name,
-        email: email,
-        password: password
-    };
+    let user = { name, email, password };
 
     localStorage.setItem("user_" + email, JSON.stringify(user));
 
-    alert("Account created successfully ✔");
+    alert("Account Created ✔");
 
-    // go to login page
     document.getElementById("signupCard").style.display = "none";
     document.getElementById("loginCard").style.display = "block";
+}
+
+function loginUser() {
+
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
+
+    let data = localStorage.getItem("user_" + email);
+
+    if (!data) {
+        alert("Account not found");
+        return;
+    }
+
+    let user = JSON.parse(data);
+
+    if (user.password === password) {
+        alert("Login Success ✔ Welcome " + user.name);
+        document.getElementById("loginCard").style.display = "none";
+    } else {
+        alert("Wrong password");
+    }
 }
 
 function resetPassword() {
     let email = document.getElementById("resetEmail").value;
 
-    if (email === "") {
+    if (!email) {
         alert("Enter email");
         return;
     }
 
-    alert("Reset link sent to " + email);
+    alert("Reset link sent (demo) to " + email);
 }
 
 
-// =========================
-// SOS SYSTEM (TIMER)
-// =========================
+// ================= SOS TIMER =================
 
 let sosTime = 10;
-let sosInterval;
+let interval;
 
 function startSOS() {
 
@@ -120,190 +96,116 @@ function startSOS() {
     let timer = document.getElementById("timerText");
     timer.innerText = sosTime;
 
-    sosInterval = setInterval(() => {
+    interval = setInterval(() => {
 
         sosTime--;
         timer.innerText = sosTime;
 
         if (sosTime <= 0) {
-            clearInterval(sosInterval);
+            clearInterval(interval);
             triggerSOS();
         }
 
     }, 1000);
 }
 
-
-// =========================
-// SOS TRIGGER (GPS + ALERT)
-// =========================
-
 function triggerSOS() {
 
-    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((pos) => {
 
-        navigator.geolocation.getCurrentPosition((position) => {
+        let link = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
 
-            let lat = position.coords.latitude;
-            let lon = position.coords.longitude;
+        alert("🚨 SOS ALERT!\n" + link);
 
-            let locationLink = `https://www.google.com/maps?q=${lat},${lon}`;
-
-            alert("🚨 SOS TRIGGERED!\n\nLocation:\n" + locationLink);
-
-            console.log("SOS LOCATION:", locationLink);
-
-        }, () => {
-            alert("Location access denied");
-        });
-
-    } else {
-        alert("Geolocation not supported");
-    }
+    });
 
     resetSOS();
 }
 
-
-// Reset SOS UI
 function resetSOS() {
-
     sosTime = 10;
-
     document.getElementById("sosBtn").style.display = "block";
     document.getElementById("sosTimerContainer").style.display = "none";
 }
 
 
-// =========================
-// INCIDENT DIARY
-// =========================
+// ================= DIARY =================
 
 function saveDiary() {
 
     let note = document.getElementById("note").value;
 
-    if (note === "") {
+    if (!note) {
         alert("Write something");
         return;
     }
 
     localStorage.setItem("incident_" + Date.now(), note);
 
-    alert("Diary Saved");
+    alert("Saved");
 }
 
 
-// =========================
-// LANGUAGE SWITCH
-// =========================
+// ================= LANGUAGE =================
 
 function changeLanguage() {
 
-    const lang = document.getElementById("language");
+    let lang = document.getElementById("language").value;
 
-    if (!lang) return;
-
-    if (lang.value === "hi") {
-        alert("Hindi language selected");
-    }
-    else if (lang.value === "kn") {
-        alert("Kannada language selected");
-    }
-    else {
-        alert("English language selected");
-    }
+    if (lang === "hi") alert("Hindi selected");
+    else if (lang === "kn") alert("Kannada selected");
+    else alert("English selected");
 }
 
 
-// =========================
-// SHAKE TO SOS (FIXED)
-// =========================
+// ================= SHAKE TO SOS =================
 
-let shakeThreshold = 18;
 let lastX = 0, lastY = 0, lastZ = 0;
 let shakeCount = 0;
-let lastShakeTime = 0;
+let lastTime = 0;
 
-window.addEventListener("devicemotion", (event) => {
+window.addEventListener("devicemotion", (e) => {
 
-    let acc = event.accelerationIncludingGravity;
-    if (!acc) return;
+    let a = e.accelerationIncludingGravity;
+    if (!a) return;
 
-    let x = acc.x || 0;
-    let y = acc.y || 0;
-    let z = acc.z || 0;
+    let dx = Math.abs(a.x - lastX);
+    let dy = Math.abs(a.y - lastY);
+    let dz = Math.abs(a.z - lastZ);
 
-    let deltaX = Math.abs(x - lastX);
-    let deltaY = Math.abs(y - lastY);
-    let deltaZ = Math.abs(z - lastZ);
+    let total = dx + dy + dz;
 
-    let totalShake = deltaX + deltaY + deltaZ;
+    let now = Date.now();
 
-    if (totalShake > shakeThreshold) {
-
-        let now = Date.now();
-
-        if (now - lastShakeTime < 2000) {
-            shakeCount++;
-        } else {
-            shakeCount = 1;
-        }
-
-        lastShakeTime = now;
-
-        if (shakeCount >= 3) {
-            shakeCount = 0;
-            startSOS();
-        }
+    if (total > 18 && now - lastTime < 2000) {
+        shakeCount++;
+    } else {
+        shakeCount = 1;
     }
 
-    lastX = x;
-    lastY = y;
-    lastZ = z;
+    lastTime = now;
+
+    if (shakeCount >= 3) {
+        shakeCount = 0;
+        startSOS();
+    }
+
+    lastX = a.x;
+    lastY = a.y;
+    lastZ = a.z;
 });
 
 
-// =========================
-// MOTION PERMISSION
-// =========================
+// ================= MOTION PERMISSION =================
 
 function enableMotion() {
-
     if (typeof DeviceMotionEvent.requestPermission === "function") {
-
-        DeviceMotionEvent.requestPermission()
-            .then(response => {
-                if (response === "granted") {
-                    console.log("Motion permission granted");
-                } else {
-                    alert("Motion permission denied");
-                }
-            })
-            .catch(console.error);
-
-    } else {
-        console.log("Motion auto-enabled");
+        DeviceMotionEvent.requestPermission().then(res => {
+            if (res === "granted") {
+                console.log("Motion enabled");
+            }
+        });
     }
 }
 
-// run once
 enableMotion();
-window.onload = function () {
-
-    let user = localStorage.getItem("loggedInUser");
-
-    if (user) {
-        console.log("User already logged in:", user);
-
-        // hide login
-        document.getElementById("loginCard").style.display = "none";
-    }
-};
-function logoutUser() {
-    localStorage.removeItem("loggedInUser");
-
-    document.getElementById("loginCard").style.display = "block";
-
-    alert("Logged out successfully");
-}
