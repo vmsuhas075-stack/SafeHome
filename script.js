@@ -254,3 +254,50 @@ function changeLanguage(){
     }
 
 }
+let shakeThreshold = 15;
+let lastX = 0, lastY = 0, lastZ = 0;
+let shakeCount = 0;
+
+// Enable shake detection
+window.addEventListener("devicemotion", (event) => {
+
+    let acc = event.accelerationIncludingGravity;
+
+    if (!acc) return;
+
+    let x = acc.x;
+    let y = acc.y;
+    let z = acc.z;
+
+    let deltaX = Math.abs(x - lastX);
+    let deltaY = Math.abs(y - lastY);
+    let deltaZ = Math.abs(z - lastZ);
+
+    if (deltaX + deltaY + deltaZ > shakeThreshold) {
+        shakeCount++;
+    }
+
+    lastX = x;
+    lastY = y;
+    lastZ = z;
+
+    // If shaken multiple times quickly → trigger SOS
+    if (shakeCount > 3) {
+        shakeCount = 0;
+        startSOS(); // your existing function
+    }
+
+    // reset counter slowly
+    setTimeout(() => {
+        shakeCount = 0;
+    }, 2000);
+});
+if (typeof DeviceMotionEvent.requestPermission === "function") {
+    DeviceMotionEvent.requestPermission()
+        .then(response => {
+            if (response === "granted") {
+                console.log("Motion permission granted");
+            }
+        })
+        .catch(console.error);
+}
