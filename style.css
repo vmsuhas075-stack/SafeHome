@@ -58,44 +58,56 @@ h1{
 
 .card:hover{
     transform:translateY(-5px);
-}
-
-#sosBtn{
-    width:100%;
-    background:#ff3b30;
-    color:white;
-    font-size:24px;
+}.sos-btn{
+    width:160px;
+    height:160px;
+    border:none;
+    border-radius:50%;
+    background:linear-gradient(145deg,#ff3b3b,#b30000);
+    color:#fff;
+    font-size:38px;
     font-weight:bold;
-    padding:18px;
-    border:none;
-    border-radius:15px;
+    letter-spacing:2px;
     cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:25px auto;
+    box-shadow:
+        0 0 20px rgba(255,0,0,.7),
+        0 0 40px rgba(255,0,0,.5),
+        inset 0 3px 8px rgba(255,255,255,.25);
+    transition:.3s;
+    animation:sosPulse 1.8s infinite;
 }
 
-#sosBtn:hover{
-    background:#e02820;
+.sos-btn:hover{
+    transform:scale(1.08);
 }
 
-button{
-    width:100%;
-    padding:15px;
-    font-size:20px;
-    border:none;
-    border-radius:12px;
-    background:#4f46e5;
-    color:white;
-    cursor:pointer;
+.sos-btn:active{
+    transform:scale(.94);
 }
 
-button:hover{
-    opacity:0.9;
-}
+@keyframes sosPulse{
 
-a{
-    text-decoration:none;
-    color:#4f46e5;
-    font-size:22px;
-    font-weight:600;
+    0%{
+        box-shadow:
+        0 0 15px rgba(255,0,0,.7),
+        0 0 30px rgba(255,0,0,.4);
+    }
+
+    50%{
+        box-shadow:
+        0 0 35px rgba(255,0,0,1),
+        0 0 70px rgba(255,0,0,.8);
+    }
+
+    100%{
+        box-shadow:
+        0 0 15px rgba(255,0,0,.7),
+        0 0 30px rgba(255,0,0,.4);
+    }
 }
 
 a:hover{
