@@ -1,85 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SafeHome+</title>
-<link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeHome+</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
 
-<header class="topbar">
-    <div class="logo">
-        🛡️ <span>SafeHome+</span>
+<div class="dashboard">
+
+    <!-- Header -->
+    <div class="header">
+        <h1>🛡 SafeHome+</h1>
+        <div class="status">🟢 SAFE</div>
     </div>
 
-    <div class="right-icons">
-        <i class="fa-solid fa-bell"></i>
-        <i class="fa-solid fa-user"></i>
+    <!-- Welcome Card -->
+    <div class="welcome-card">
+        <h2>Hello 👋</h2>
+        <p>Your safety shield is active</p>
     </div>
-</header>
 
-<div class="welcome-card">
+    <!-- SOS Card -->
+    <div class="sos-card" onclick="sendSOS()">
+        <div>
+            <h2>🚨 SOS EMERGENCY</h2>
+            <p>Tap to alert emergency contacts</p>
+        </div>
 
-<h2>Hello 👋</h2>
+        <div class="arrow">
+            ➜
+        </div>
+    </div>
 
-<p>Your safety shield is active</p>
+    <!-- Status -->
+    <div class="status-grid">
 
-<span class="safe-badge">● SAFE</span>
+        <div class="mini-card">
+            <i class="fa-solid fa-users"></i>
+            <h3>Contacts</h3>
+        </div>
 
-</div>
+        <div class="mini-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>24/7</h3>
+        </div>
 
-<div class="sos-card" onclick="sendSOS()">
+        <div class="mini-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>GPS</h3>
+        </div>
 
-<div>
+        <div class="mini-card">
+            <i class="fa-solid fa-robot"></i>
+            <h3>AI</h3>
+        </div>
 
-<h2>🚨 SOS EMERGENCY</h2>
+    </div>
 
-<p>Tap to alert emergency contacts</p>
+    <h3 class="section-title">Safety Features</h3>
 
-</div>
+    <div class="feature-grid">
 
-<i class="fa-solid fa-arrow-right"></i>
+        <a href="contacts.html" class="feature-card">
+            👥
+            <span>Trusted Contacts</span>
+        </a>
 
-</div>
+        <a href="diary.html" class="feature-card">
+            📝
+            <span>Incident Diary</span>
+        </a>
 
-<h3 class="heading">Safety Features</h3>
+        <a href="resources.html" class="feature-card">
+            📞
+            <span>Helplines</span>
+        </a>
 
-<div class="grid">
+        <a href="#" class="feature-card">
+            📍
+            <span>Live Location</span>
+        </a>
 
-<div class="feature">
-<i class="fa-solid fa-location-dot"></i>
-<h4>Live Location</h4>
-</div>
+        <a href="#" class="feature-card">
+            🎤
+            <span>Voice Recorder</span>
+        </a>
 
-<div class="feature">
-<i class="fa-solid fa-users"></i>
-<h4>Trusted Contacts</h4>
-</div>
+        <a href="#" class="feature-card">
+            🗺
+            <span>Safe Route</span>
+        </a>
 
-<div class="feature">
-<i class="fa-solid fa-phone"></i>
-<h4>Helplines</h4>
-</div>
+    </div>
 
-<div class="feature">
-<i class="fa-solid fa-book"></i>
-<h4>Incident Diary</h4>
-</div>
-
-<div class="feature">
-<i class="fa-solid fa-microphone"></i>
-<h4>Voice Recorder</h4>
-</div>
-
-<div class="feature">
-<i class="fa-solid fa-map"></i>
-<h4>Safe Route</h4>
-</div>
+    <button class="exit-btn" onclick="fakeExit()">
+        ⚡ Quick Exit
+    </button>
 
 </div>
 
