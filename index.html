@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeHome+ Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeHome+ Login</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
 
 <div class="login-container">
 
-    <div class="login-card">
+<div class="login-card">
 
-        <div class="logo">
-            🛡️
-        </div>
+<div class="logo">
+🛡️
+</div>
 
-        <h1>SafeHome+</h1>
+<h1>SafeHome+</h1>
 
-        <p>Your Personal Safety Companion</p>
+<p>Your Personal Safety Companion</p>
 
-        <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            class="login-input"
-        >
+<input
+type="email"
+id="username"
+class="login-input"
+placeholder="Email">
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            class="login-input"
-        >
+<input
+type="password"
+id="password"
+class="login-input"
+placeholder="Password">
 
-        <button class="login-btn" onclick="login()">
-            Login
-        </button>
+<button
+class="login-btn"
+onclick="login()">
 
-        <p class="login-footer">
-            Stay Safe • Stay Connected
-        </p>
+Login
 
-    </div>
+</button>
+
+<br><br>
+
+<button
+class="register-btn"
+onclick="window.location.href='register.html'">
+
+Create Account
+
+</button>
+
+<p class="login-footer">
+
+Stay Safe • Stay Connected
+
+</p>
+
+</div>
 
 </div>
 
 <script src="script.js"></script>
-
-<script>
-function login(){
-
-    let user=document.getElementById("username").value;
-    let pass=document.getElementById("password").value;
-
-    if(user==="admin" && pass==="1234"){
-        window.location.href="dashboard.html";
-    }else{
-        alert("Invalid Username or Password");
-    }
-
-}
-</script>
 
 </body>
 </html>
