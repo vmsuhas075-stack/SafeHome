@@ -1,1 +1,94 @@
-<html><head><link rel='stylesheet' href='style.css'></head><body><h2>Incident Diary</h2><textarea id='note'></textarea><button onclick='saveDiary()'>Save</button><script src='script.js'></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Incident Diary</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<div class="header">
+
+<div class="logo">
+📝 Incident Diary
+</div>
+
+<a href="dashboard.html" class="back-btn">
+<i class="fa-solid fa-arrow-left"></i>
+</a>
+
+</div>
+
+<div class="welcome-card">
+
+<h2>Record an Incident</h2>
+
+<p>
+Write details about any incident for future reference.
+</p>
+
+<br>
+
+<input
+type="date"
+class="login-input"
+id="incidentDate">
+
+<textarea
+id="note"
+class="login-input"
+rows="8"
+placeholder="Describe what happened..."></textarea>
+
+<button
+class="login-btn"
+onclick="saveDiary()">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Incident
+
+</button>
+
+</div>
+
+<div class="welcome-card">
+
+<h2>Safety Tips</h2>
+
+<p>✔ Stay calm during emergencies.</p>
+<p>✔ Share your live location with trusted contacts.</p>
+<p>✔ Keep emergency numbers ready.</p>
+<p>✔ Use the SOS feature only in genuine emergencies.</p>
+
+</div>
+
+<button
+class="exit-btn"
+onclick="window.location='dashboard.html'">
+
+⬅ Back to Dashboard
+
+</button>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+document.getElementById("incidentDate").valueAsDate = new Date();
+</script>
+
+</body>
+</html>
