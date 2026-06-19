@@ -1,303 +1,233 @@
 // =========================
-// LOGIN
+// NAVIGATION (LOGIN SYSTEM)
 // =========================
 
-function login(){
+document.getElementById("showSignup")?.addEventListener("click", () => {
+    document.getElementById("loginCard").style.display = "none";
+    document.getElementById("signupCard").style.display = "block";
+});
 
-    let email = document.getElementById("username").value.trim();
-    let password = document.getElementById("password").value.trim();
+document.getElementById("showLogin")?.addEventListener("click", () => {
+    document.getElementById("signupCard").style.display = "none";
+    document.getElementById("loginCard").style.display = "block";
+});
 
-    let user = JSON.parse(localStorage.getItem("safehomeUser"));
+document.getElementById("showReset")?.addEventListener("click", () => {
+    document.getElementById("loginCard").style.display = "none";
+    document.getElementById("resetCard").style.display = "block";
+});
 
-    if(user === null){
+document.getElementById("backToLogin")?.addEventListener("click", () => {
+    document.getElementById("resetCard").style.display = "none";
+    document.getElementById("loginCard").style.display = "block";
+});
 
-        alert("No account found. Please create an account first.");
-        return;
 
-    }
+// =========================
+// AUTH (DUMMY)
+// =========================
 
-    if(email === user.email && password === user.password){
-
-        localStorage.setItem("loggedIn","true");
-
-        alert("Login Successful");
-
-        window.location.href = "dashboard.html";
-
-    }else{
-
-        alert("Invalid Email or Password");
-
-    }
-
+function loginUser() {
+    alert("Login Successful");
 }
 
-// =========================
-// CREATE ACCOUNT
-// =========================
-
-function register(){
-
-    let fullname = document.getElementById("fullname").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let password = document.getElementById("regPassword").value;
-    let confirm = document.getElementById("confirmPassword").value;
-
-    if(fullname==="" || email==="" || phone==="" || password===""){
-
-        alert("Please fill all fields.");
-        return;
-
-    }
-
-    if(password !== confirm){
-
-        alert("Passwords do not match.");
-        return;
-
-    }
-
-    let user = {
-
-        fullname: fullname,
-        email: email,
-        phone: phone,
-        password: password
-
-    };
-
-    localStorage.setItem("safehomeUser", JSON.stringify(user));
-
-    alert("Account Created Successfully!");
-
-    window.location.href = "index.html";
-
+function registerUser() {
+    alert("Account Created Successfully");
 }
 
-function sendSOS(){
+function resetPassword() {
+    let email = document.getElementById("resetEmail").value;
 
-    let countdown = 5;
+    if (email === "") {
+        alert("Enter email");
+        return;
+    }
 
-    const popup = document.createElement("div");
+    alert("Reset link sent to " + email);
+}
 
-    popup.style.position = "fixed";
-    popup.style.top = "0";
-    popup.style.left = "0";
-    popup.style.width = "100%";
-    popup.style.height = "100%";
-    popup.style.background = "rgba(0,0,0,.7)";
-    popup.style.display = "flex";
-    popup.style.justifyContent = "center";
-    popup.style.alignItems = "center";
-    popup.style.zIndex = "9999";
 
-    popup.innerHTML = `
-    <div style="
-        width:90%;
-        max-width:360px;
-        background:white;
-        border-radius:20px;
-        padding:30px;
-        text-align:center;
-        color:black;
-        animation:popup .3s;
-    ">
-        <div style="font-size:70px;">🚨</div>
+// =========================
+// SOS SYSTEM (TIMER)
+// =========================
 
-        <h2 style="color:red;">
-        SOS ACTIVATED
-        </h2>
+let sosTime = 10;
+let sosInterval;
 
-        <h3>
-        Sending SOS in
-        <span id="timer">5</span>
-        sec
-        </h3>
+function startSOS() {
 
-    </div>
-    `;
+    document.getElementById("sosBtn").style.display = "none";
+    document.getElementById("sosTimerContainer").style.display = "block";
 
-    document.body.appendChild(popup);
+    let timer = document.getElementById("timerText");
+    timer.innerText = sosTime;
 
-    const interval = setInterval(function(){
+    sosInterval = setInterval(() => {
 
-        countdown--;
+        sosTime--;
+        timer.innerText = sosTime;
 
-        document.getElementById("timer").innerHTML = countdown;
-
-        if(countdown <= 0){
-
-            clearInterval(interval);
-
-            popup.innerHTML = `
-            <div style="
-                width:90%;
-                max-width:360px;
-                background:white;
-                border-radius:20px;
-                padding:30px;
-                text-align:center;
-                color:black;
-            ">
-
-            <div style="font-size:70px;">
-            ✅
-            </div>
-
-            <h2 style="color:green;">
-            SOS Alert Sent Successfully
-            </h2>
-
-            </div>
-            `;
-
-            setTimeout(function(){
-
-                popup.remove();
-
-            },2000);
-
+        if (sosTime <= 0) {
+            clearInterval(sosInterval);
+            triggerSOS();
         }
 
-    },1000);
-
+    }, 1000);
 }
 
-// =========================
-// QUICK EXIT
-// =========================
-
-function fakeExit(){
-
-    window.location.href="https://www.google.com";
-
-}
 
 // =========================
-// TRUSTED CONTACTS
+// SOS TRIGGER (GPS + ALERT)
 // =========================
 
-function addContact(){
+function triggerSOS() {
 
-    let name=document.getElementById("name").value;
-    let phone=document.getElementById("phone").value;
+    if (navigator.geolocation) {
 
-    if(name==="" || phone===""){
+        navigator.geolocation.getCurrentPosition((position) => {
 
-        alert("Enter Name and Phone");
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
 
-        return;
+            let locationLink = `https://www.google.com/maps?q=${lat},${lon}`;
 
+            alert("🚨 SOS TRIGGERED!\n\nLocation:\n" + locationLink);
+
+            console.log("SOS LOCATION:", locationLink);
+
+        }, () => {
+            alert("Location access denied");
+        });
+
+    } else {
+        alert("Geolocation not supported");
     }
 
-    localStorage.setItem(name,phone);
-
-    alert("Contact Saved");
-
+    resetSOS();
 }
+
+
+// Reset SOS UI
+function resetSOS() {
+
+    sosTime = 10;
+
+    document.getElementById("sosBtn").style.display = "block";
+    document.getElementById("sosTimerContainer").style.display = "none";
+}
+
 
 // =========================
 // INCIDENT DIARY
 // =========================
 
-function saveDiary(){
+function saveDiary() {
 
-    let note=document.getElementById("note").value;
+    let note = document.getElementById("note").value;
 
-    if(note===""){
-
+    if (note === "") {
         alert("Write something");
-
         return;
-
     }
 
-    localStorage.setItem(
-
-        "incident_"+Date.now(),
-
-        note
-
-    );
+    localStorage.setItem("incident_" + Date.now(), note);
 
     alert("Diary Saved");
-
 }
 
+
 // =========================
-// LANGUAGE
+// LANGUAGE SWITCH
 // =========================
 
-function changeLanguage(){
+function changeLanguage() {
 
-    const lang=document.getElementById("language");
+    const lang = document.getElementById("language");
 
-    if(!lang) return;
+    if (!lang) return;
 
-    if(lang.value==="hi"){
-
+    if (lang.value === "hi") {
         alert("Hindi language selected");
-
     }
-
-    else if(lang.value==="kn"){
-
+    else if (lang.value === "kn") {
         alert("Kannada language selected");
-
     }
-
-    else{
-
+    else {
         alert("English language selected");
-
     }
-
 }
-let shakeThreshold = 15;
+
+
+// =========================
+// SHAKE TO SOS (FIXED)
+// =========================
+
+let shakeThreshold = 18;
 let lastX = 0, lastY = 0, lastZ = 0;
 let shakeCount = 0;
+let lastShakeTime = 0;
 
-// Enable shake detection
 window.addEventListener("devicemotion", (event) => {
 
     let acc = event.accelerationIncludingGravity;
-
     if (!acc) return;
 
-    let x = acc.x;
-    let y = acc.y;
-    let z = acc.z;
+    let x = acc.x || 0;
+    let y = acc.y || 0;
+    let z = acc.z || 0;
 
     let deltaX = Math.abs(x - lastX);
     let deltaY = Math.abs(y - lastY);
     let deltaZ = Math.abs(z - lastZ);
 
-    if (deltaX + deltaY + deltaZ > shakeThreshold) {
-        shakeCount++;
+    let totalShake = deltaX + deltaY + deltaZ;
+
+    if (totalShake > shakeThreshold) {
+
+        let now = Date.now();
+
+        if (now - lastShakeTime < 2000) {
+            shakeCount++;
+        } else {
+            shakeCount = 1;
+        }
+
+        lastShakeTime = now;
+
+        if (shakeCount >= 3) {
+            shakeCount = 0;
+            startSOS();
+        }
     }
 
     lastX = x;
     lastY = y;
     lastZ = z;
-
-    // If shaken multiple times quickly → trigger SOS
-    if (shakeCount > 3) {
-        shakeCount = 0;
-        startSOS(); // your existing function
-    }
-
-    // reset counter slowly
-    setTimeout(() => {
-        shakeCount = 0;
-    }, 2000);
 });
-if (typeof DeviceMotionEvent.requestPermission === "function") {
-    DeviceMotionEvent.requestPermission()
-        .then(response => {
-            if (response === "granted") {
-                console.log("Motion permission granted");
-            }
-        })
-        .catch(console.error);
+
+
+// =========================
+// MOTION PERMISSION
+// =========================
+
+function enableMotion() {
+
+    if (typeof DeviceMotionEvent.requestPermission === "function") {
+
+        DeviceMotionEvent.requestPermission()
+            .then(response => {
+                if (response === "granted") {
+                    console.log("Motion permission granted");
+                } else {
+                    alert("Motion permission denied");
+                }
+            })
+            .catch(console.error);
+
+    } else {
+        console.log("Motion auto-enabled");
+    }
 }
+
+// run once
+enableMotion();
