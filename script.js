@@ -4,25 +4,76 @@
 
 function login(){
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
+    let email = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
 
-    if(username === "admin" && password === "1234"){
+    let user = JSON.parse(localStorage.getItem("safehomeUser"));
+
+    if(user === null){
+
+        alert("No account found. Please create an account first.");
+        return;
+
+    }
+
+    if(email === user.email && password === user.password){
 
         localStorage.setItem("loggedIn","true");
+
+        alert("Login Successful");
+
         window.location.href = "dashboard.html";
 
     }else{
 
-        alert("Invalid Username or Password");
+        alert("Invalid Email or Password");
 
     }
 
 }
 
 // =========================
-// SOS ALERT
+// CREATE ACCOUNT
 // =========================
+
+function register(){
+
+    let fullname = document.getElementById("fullname").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let password = document.getElementById("regPassword").value;
+    let confirm = document.getElementById("confirmPassword").value;
+
+    if(fullname==="" || email==="" || phone==="" || password===""){
+
+        alert("Please fill all fields.");
+        return;
+
+    }
+
+    if(password !== confirm){
+
+        alert("Passwords do not match.");
+        return;
+
+    }
+
+    let user = {
+
+        fullname: fullname,
+        email: email,
+        phone: phone,
+        password: password
+
+    };
+
+    localStorage.setItem("safehomeUser", JSON.stringify(user));
+
+    alert("Account Created Successfully!");
+
+    window.location.href = "index.html";
+
+}
 
 function sendSOS(){
 
