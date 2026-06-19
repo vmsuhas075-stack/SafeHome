@@ -1,138 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeHome+ Login</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+    <link rel="stylesheet" href="style.css">
 
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#202124;
-}
-
-.calculator{
-background:#2d2d2d;
-padding:30px;
-border-radius:25px;
-width:450px;
-max-width:95%;
-box-shadow:0 0 25px rgba(0,0,0,0.5);
-}
-
-#display{
-width:100%;
-height:90px;
-font-size:40px;
-text-align:right;
-padding:15px;
-border:none;
-border-radius:15px;
-margin-bottom:20px;
-background:white;
-}
-
-.buttons{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-}
-
-button{
-height:80px;
-font-size:28px;
-border:none;
-border-radius:15px;
-cursor:pointer;
-background:#444;
-color:white;
-}
-
-button:hover{
-background:#555;
-}
-
-.equal{
-grid-column:span 4;
-background:#ff9500;
-}
-
-.equal:hover{
-background:#ffad33;
-}
-</style>
-
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
-<div class="calculator">
+<div class="login-container">
 
-<input type="text" id="display" readonly>
+    <div class="login-card">
 
-<div class="buttons">
+        <div class="logo">
+            🛡️
+        </div>
 
-<button onclick="appendValue('7')">7</button>
-<button onclick="appendValue('8')">8</button>
-<button onclick="appendValue('9')">9</button>
-<button onclick="appendValue('/')">÷</button>
+        <h1>SafeHome+</h1>
 
-<button onclick="appendValue('4')">4</button>
-<button onclick="appendValue('5')">5</button>
-<button onclick="appendValue('6')">6</button>
-<button onclick="appendValue('*')">×</button>
+        <p>Your Personal Safety Companion</p>
 
-<button onclick="appendValue('1')">1</button>
-<button onclick="appendValue('2')">2</button>
-<button onclick="appendValue('3')">3</button>
-<button onclick="appendValue('-')">−</button>
+        <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            class="login-input"
+        >
 
-<button onclick="appendValue('0')">0</button>
-<button onclick="appendValue('.')">.</button>
-<button onclick="clearDisplay()">C</button>
-<button onclick="appendValue('+')">+</button>
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            class="login-input"
+        >
 
-<button class="equal" onclick="calculate()">=</button>
+        <button class="login-btn" onclick="login()">
+            Login
+        </button>
+
+        <p class="login-footer">
+            Stay Safe • Stay Connected
+        </p>
+
+    </div>
 
 </div>
 
-</div>
+<script src="script.js"></script>
 
 <script>
-let display=document.getElementById("display");
+function login(){
 
-function appendValue(value){
-display.value+=value;
-}
+    let user=document.getElementById("username").value;
+    let pass=document.getElementById("password").value;
 
-function clearDisplay(){
-display.value="";
-}
-
-function calculate(){
-
-let input=display.value;
-
-if(input==="1234"){
-window.location.href="dashboard.html";
-return;
-}
-
-try{
-display.value=eval(input);
-}
-catch{
-display.value="Error";
-}
+    if(user==="admin" && pass==="1234"){
+        window.location.href="dashboard.html";
+    }else{
+        alert("Invalid Username or Password");
+    }
 
 }
 </script>
