@@ -465,3 +465,36 @@ grid-template-columns:1fr 1fr;
 }
 
     }
+.register-btn{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:15px;
+
+background:transparent;
+
+border:2px solid #4fc3ff;
+
+color:#4fc3ff;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.register-btn:hover{
+
+background:#4fc3ff;
+
+color:white;
+
+}
