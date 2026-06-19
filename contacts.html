@@ -1,1 +1,166 @@
-<html><head><link rel='stylesheet' href='style.css'></head><body><h2>Trusted Contacts</h2><input id='name' placeholder='Name'><input id='phone' placeholder='Phone'><button onclick='addContact()'>Add</button><script src='script.js'></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trusted Contacts</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<div class="header">
+
+<div class="logo">
+👥 Trusted Contacts
+</div>
+
+<a href="dashboard.html" class="back-btn">
+<i class="fa-solid fa-arrow-left"></i>
+</a>
+
+</div>
+
+<div class="welcome-card">
+
+<h2>Add Emergency Contact</h2>
+
+<input
+type="text"
+id="name"
+class="login-input"
+placeholder="Contact Name">
+
+<input
+type="tel"
+id="phone"
+class="login-input"
+placeholder="Phone Number">
+
+<button
+class="login-btn"
+onclick="addContact()">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Add Contact
+
+</button>
+
+</div>
+
+<div class="section-title">
+
+<h2>Emergency Numbers</h2>
+
+</div>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+
+👮
+
+<h3>Police</h3>
+
+<p>100</p>
+
+<a href="tel:100">
+
+<button class="login-btn">
+
+Call
+
+</button>
+
+</a>
+
+</div>
+
+<div class="feature-card">
+
+🚑
+
+<h3>Ambulance</h3>
+
+<p>108</p>
+
+<a href="tel:108">
+
+<button class="login-btn">
+
+Call
+
+</button>
+
+</a>
+
+</div>
+
+<div class="feature-card">
+
+🚒
+
+<h3>Fire</h3>
+
+<p>101</p>
+
+<a href="tel:101">
+
+<button class="login-btn">
+
+Call
+
+</button>
+
+</a>
+
+</div>
+
+<div class="feature-card">
+
+🆘
+
+<h3>Women Helpline</h3>
+
+<p>181</p>
+
+<a href="tel:181">
+
+<button class="login-btn">
+
+Call
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<br>
+
+<button
+class="exit-btn"
+onclick="window.location='dashboard.html'">
+
+⬅ Back to Dashboard
+
+</button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
