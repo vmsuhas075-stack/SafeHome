@@ -28,11 +28,69 @@ document.getElementById("backToLogin")?.addEventListener("click", () => {
 // =========================
 
 function loginUser() {
-    alert("Login Successful");
+
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
+
+    if (!email || !password) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let storedUser = localStorage.getItem("user_" + email);
+
+    if (!storedUser) {
+        alert("No account found. Please sign up first.");
+        return;
+    }
+
+    let user = JSON.parse(storedUser);
+
+    if (user.password === password) {
+
+        alert("Login successful ✔ Welcome " + user.name);
+
+        // SAVE SESSION (important fix)
+        localStorage.setItem("loggedInUser", email);
+
+        // OPTIONAL: show SOS page / hide login
+        document.getElementById("loginCard").style.display = "none";
+
+    } else {
+        alert("Wrong password ❌");
+    }
 }
 
 function registerUser() {
-    alert("Account Created Successfully");
+
+    let name = document.getElementById("signupName").value;
+    let email = document.getElementById("signupEmail").value;
+    let password = document.getElementById("signupPassword").value;
+
+    if (!name || !email || !password) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    // check if already exists
+    if (localStorage.getItem("user_" + email)) {
+        alert("Account already exists!");
+        return;
+    }
+
+    let user = {
+        name: name,
+        email: email,
+        password: password
+    };
+
+    localStorage.setItem("user_" + email, JSON.stringify(user));
+
+    alert("Account created successfully ✔");
+
+    // go to login page
+    document.getElementById("signupCard").style.display = "none";
+    document.getElementById("loginCard").style.display = "block";
 }
 
 function resetPassword() {
@@ -231,3 +289,21 @@ function enableMotion() {
 
 // run once
 enableMotion();
+window.onload = function () {
+
+    let user = localStorage.getItem("loggedInUser");
+
+    if (user) {
+        console.log("User already logged in:", user);
+
+        // hide login
+        document.getElementById("loginCard").style.display = "none";
+    }
+};
+function logoutUser() {
+    localStorage.removeItem("loggedInUser");
+
+    document.getElementById("loginCard").style.display = "block";
+
+    alert("Logged out successfully");
+}
